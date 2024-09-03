@@ -1,0 +1,29 @@
+@import "/src/variables.scss";
+
+.sidebar {
+  width: 250px;
+  height: calc(100% - 25px);
+  background-color: white;
+  position: relative;
+  float: left;
+  border: 1px solid $border-color;
+
+  &-nav {
+    ul {
+      padding: 16px;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      text-align: center;
+      a {
+        color: black;
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+      }
+    }
+  }
+}

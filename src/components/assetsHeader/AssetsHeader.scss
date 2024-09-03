@@ -1,0 +1,9 @@
+@import "/src/variables.scss";
+
+.assetsHeader {
+  display: flex;
+  justify-content: space-between;
+  span {
+    color: $secondary-text-gray-color;
+  }
+}
