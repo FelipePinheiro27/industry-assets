@@ -6,11 +6,13 @@ import "./AssetsContent.scss";
 
 const AssetsContent = () => {
   return (
-    <body className="assetsContent">
+    <div className="assetsContent">
       <AssetsHeader />
-      <Sidebar />
-      <ProductView />
-    </body>
+      <div className="assetsContent__boxes">
+        <Sidebar />
+        <ProductView />
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../button/Button";
 import "./AssetsHeader.scss";
 
 const AssetsHeader = () => {
@@ -8,7 +9,10 @@ const AssetsHeader = () => {
         <h3>Ativos</h3>
         <span> / Apex Unit</span>
       </div>
-      <div>FILTERS</div>
+      <div className="assetsHeader-buttons">
+        <Button />
+        <Button />
+      </div>
     </header>
   );
 };

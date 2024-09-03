@@ -1,14 +1,14 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    background-color: $primary-header;
-    padding: 0 15px;
-    align-items: center;
-    color: white;
-    height: 48px;
-    img {
-        height: 14px;
-    }
+  display: flex;
+  justify-content: space-between;
+  background-color: $primary-header;
+  padding: 0 15px;
+  align-items: center;
+  color: $text-white-color;
+  height: 48px;
+  img {
+    height: 14px;
+  }
 }

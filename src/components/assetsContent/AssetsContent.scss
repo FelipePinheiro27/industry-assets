@@ -1,7 +1,15 @@
+@import "/src/variables.scss";
+
 .assetsContent {
-  background-color: white;
-  width: calc(100% - 40px);
-  height: calc(100vh - 90px);
-  margin: 10px;
+  background-color: $text-white-color;
+  height: calc(100vh - 85px);
+  border: 8px solid $background-gray;
   padding: 10px;
+
+  &__boxes {
+    height: calc(100% - 60px);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 15px;
+  }
 }

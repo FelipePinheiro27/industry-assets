@@ -1,9 +1,8 @@
 @import "/src/variables.scss";
 
 .sidebar {
-  width: 250px;
-  height: calc(100% - 25px);
-  background-color: white;
+  width: 100%;
+  background-color: $text-white-color;
   position: relative;
   float: left;
   border: 1px solid $border-color;
