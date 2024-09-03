@@ -1,0 +1,26 @@
+@import "/src/variables.scss";
+
+.button {
+  display: inline-flex;
+  padding: 6px 16px;
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid $border-color;
+  color: $secondary-text-gray-color;
+  cursor: pointer;
+
+  &-icon {
+    display: inline-flex;
+    margin-right: 10px;
+  }
+
+  &.active {
+    background-color: $button-secondary-color;
+    color: $text-white-color;
+
+    .button-icon img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}

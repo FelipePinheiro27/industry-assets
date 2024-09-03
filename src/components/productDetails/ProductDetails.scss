@@ -1,0 +1,23 @@
+@import "/src//variables.scss";
+
+.productDetails {
+  display: flex;
+  align-items: center;
+  height: 226px;
+
+  &-imageContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 336px;
+    border: 1px solid $border-color;
+    img {
+      width: 201px;
+    }
+  }
+
+  &__info {
+    width: 100%;
+    padding-left: 20px;
+  }
+}

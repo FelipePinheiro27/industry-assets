@@ -1,0 +1,15 @@
+@import "/src/variables.scss";
+
+.textInfo {
+  display: block;
+  h4 {
+    margin: 0;
+    line-height: 24px;
+    margin-bottom: 7px;
+  }
+  span {
+    font-size: 16px;
+    font-weight: 400;
+    color: $primary-text-gray-color;
+  }
+}

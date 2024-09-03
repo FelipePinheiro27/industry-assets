@@ -1,0 +1,25 @@
+@import "/src/variables.scss";
+
+.productView {
+  border: 1px solid $border-color;
+  &__productTitle {
+    padding: 15px 0;
+    border: 1px solid $border-color;
+    color: text-black-secondary-color;
+
+    h3 {
+      margin-left: 25px;
+    }
+  }
+
+  &__content {
+    padding: 20px 40px;
+
+    &-more {
+      display: flex;
+      div {
+        width: 50%;
+      }
+    }
+  }
+}
