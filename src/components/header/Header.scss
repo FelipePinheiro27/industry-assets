@@ -11,4 +11,9 @@
   img {
     height: 14px;
   }
+
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
 }

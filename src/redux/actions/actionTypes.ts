@@ -1,0 +1,1 @@
+export const COMPANY_SELECTED = "COMPANY_SELECTED";

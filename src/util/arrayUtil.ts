@@ -1,0 +1,1 @@
+export const hasLength = <T>(arr: T[] | null | undefined) => !!(arr && arr.length);

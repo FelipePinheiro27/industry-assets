@@ -1,0 +1,22 @@
+@import "/src/variables.scss";
+
+.secondaryButton {
+  display: inline-flex;
+  padding: 6px 16px;
+  background-color: $button-primary-color;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+
+  &-icon {
+    display: inline-flex;
+    margin-right: 10px;
+    img {
+      width: 18px;
+    }
+  }
+
+  &.active {
+    background-color: $button-secondary-color;
+  }
+}
