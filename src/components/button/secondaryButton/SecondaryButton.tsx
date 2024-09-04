@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Company from "../../../assets/company_logo.svg";
 import "./SecondaryButton.scss";
 

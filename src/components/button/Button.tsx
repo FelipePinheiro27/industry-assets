@@ -12,7 +12,7 @@ const Button = () => {
   return (
     <div className={`button ${isActive ? "active" : ""}`} onClick={handleClick}>
       <i className="button-icon">
-        <img src={Bolt} alt="Bolt Image" />
+        <img src={Bolt} alt="Bolt" />
       </i>
       Sensor de Energia
     </div>

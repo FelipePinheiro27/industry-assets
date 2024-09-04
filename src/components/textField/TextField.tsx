@@ -2,11 +2,18 @@ import React from "react";
 import SearchIcon from "../../assets/lupa.svg";
 import "./TextField.scss";
 
-const TextField: React.FC = () => {
+interface ITextField {
+  value: string;
+  onChange: (e: any) => void;
+}
+
+const TextField = ({ value, onChange }: ITextField) => {
   return (
     <div className="textField">
       <input
         type="text"
+        value={value}
+        onChange={onChange}
         className="textField-input"
         placeholder="Buscar Ativo ou Local"
       />

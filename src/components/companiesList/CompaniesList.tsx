@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SecondaryButton from "../button/secondaryButton/SecondaryButton";
 import { retrieveAllCompanies } from "../../api/companiesAPI";
-import { company } from "../../types/companies";
+import { companyType } from "../../types/companies";
 import { hasLength } from "../../util/arrayUtil";
 import { IState } from "../../redux/reducers/companyReducer";
 import { setSelectedCompany } from "../../redux/actions/companyAction";
 
 const CompaniesList = () => {
   const dispatch = useDispatch<any>();
-  const [companies, setCompanies] = useState<company[]>([]);
+  const [companies, setCompanies] = useState<companyType[]>([]);
   const selectedCompany = useSelector((state: IState) => state.selectedCompany);
 
-  const fillInitialActiveCompany = (companiesFethed: company[]) => {
-    if (selectedCompany === "" && hasLength(companiesFethed)) {
-      dispatch(setSelectedCompany(companiesFethed[0].id));
-    }
-  };
+  const fillInitialActiveCompany = useCallback(
+    (companiesFethed: companyType[]) => {
+      if (selectedCompany === "" && hasLength(companiesFethed)) {
+        dispatch(setSelectedCompany(companiesFethed[0].id));
+      }
+    },
+    [dispatch, selectedCompany]
+  );
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -26,9 +29,9 @@ const CompaniesList = () => {
     };
 
     fetchCompanies();
-  }, []);
+  }, [fillInitialActiveCompany]);
 
-  const onCompanyClick = (selectedCompany: company) => {
+  const onCompanyClick = (selectedCompany: companyType) => {
     dispatch(setSelectedCompany(selectedCompany.id));
   };
 
