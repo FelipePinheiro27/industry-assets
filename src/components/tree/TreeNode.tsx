@@ -1,91 +1,60 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Down from "../../assets/down.svg";
+import DownIcon from "../../assets/down.svg";
 import LocationIcon from "../../assets/location.svg";
 import AssetIcon from "../../assets/asset.svg";
-import ComponetIcon from "../../assets/component.png";
-import BoltIcon from "../../assets/bolt.svg";
-import BoltIconRed from "../../assets/bolt_red.svg";
+import ComponentIcon from "../../assets/component.png";
 import { hasLength } from "../../util/arrayUtil";
 import { ITreeData } from "../../types/tree";
 import { setComponentData } from "../../redux/actions/companyAction";
 import { IState } from "../../redux/reducers/companyReducer";
-import { riskColor } from "../../constants/generalConstant";
+import BoltStatusIcon from "../productView/BoltStatusIcon";
+import RiskStatusIndicator from "../riskStatusIndicator/RiskStatusIndicator";
 
 interface TreeNodeProps {
   node: ITreeData;
 }
 
-const boltColor = {
-  operating: (
-    <i>
-      <img src={BoltIcon} alt={"Bolt"} />
-    </i>
-  ),
-  alert: (
-    <i>
-      <img src={BoltIconRed} alt={"Bolt Red"} />
-    </i>
-  ),
-};
-
 const iconsByType = {
-  location: (
-    <i>
-      <img src={LocationIcon} alt="Location Icon" />
-    </i>
-  ),
-  asset: (
-    <i>
-      <img src={AssetIcon} alt="Asset Icon" />
-    </i>
-  ),
-  component: (
-    <i>
-      <img src={ComponetIcon} alt="Component Icon" />
-    </i>
-  ),
+  location: <img src={LocationIcon} alt="Location Icon" />,
+  asset: <img src={AssetIcon} alt="Asset Icon" />,
+  component: <img src={ComponentIcon} alt="Component Icon" />,
 };
 
 const TreeNode: React.FC<TreeNodeProps> = ({ node }) => {
   const dispatch = useDispatch<any>();
   const [isExpanded, setIsExpanded] = useState(true);
-  const isComponent = node.type === "component";
   const selectedComponent = useSelector(
     (state: IState) => state.selectedComponent
   );
 
-  const onNodeClick = () => {
+  const isEnergy = useMemo(
+    () => node.type === "component" && node.sensorType === "energy",
+    [node]
+  );
+
+  const handleNodeClick = () => {
     if (node.type === "component") {
       dispatch(setComponentData(node));
-      return;
+    } else {
+      setIsExpanded((prev) => !prev);
     }
-    setIsExpanded(!isExpanded);
   };
-
-  const isEnergy = useMemo(() => {
-    if (isComponent) {
-      return node?.sensorType === "energy";
-    }
-  }, [isComponent, node]);
 
   return (
     <li className={selectedComponent?.id === node.id ? "active" : ""}>
-      <div className="treeView-icons" onClick={onNodeClick}>
+      <div className="treeView-icons" onClick={handleNodeClick}>
         {hasLength(node.children) && (
-          <i className={!isExpanded ? "expand" : ""}>
-            <img src={Down} alt={isExpanded ? "Collapse" : "Expand"} />
+          <i className={isExpanded ? "" : "expand"}>
+            <img src={DownIcon} alt={isExpanded ? "Collapse" : "Expand"} />
           </i>
         )}
-        {iconsByType[node.type || "component"]}
+        <i>{iconsByType[node.type || "component"]}</i>
         {node.name}
         {isEnergy ? (
-          boltColor[node.status!]
+          <BoltStatusIcon status={node.status} />
         ) : (
-          <div
-            style={{ backgroundColor: riskColor[node.status!] }}
-            className="circle-risk"
-          />
+          <RiskStatusIndicator status={node.status} />
         )}
       </div>
       {isExpanded && node.children && node.children.length > 0 && (

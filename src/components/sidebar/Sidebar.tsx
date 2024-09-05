@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useDeferredValue, useState } from "react";
 import TextField from "../textField/TextField";
 import { useGroups } from "../../hooks/useGroups";
 import TreeView from "../tree/TreeView";
@@ -18,18 +18,22 @@ interface ISidebar {
 const Sidebar = ({ filter }: ISidebar) => {
   const { locations, assets } = useGroups();
   const [searchText, setSearchText] = useState("");
+  const deferredSearchText = useDeferredValue(searchText);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
+
   const treeData = buildTree(
     parseLocationToTreeData(locations),
     parseAssetsToTreeData(assets)
   );
-  const filteredTreeData = filterTree(treeData, searchText, filter);
+
+  const filteredTreeData = filterTree(treeData, deferredSearchText, filter);
 
   return (
     <div className="sidebar">
-      <TextField
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
+      <TextField value={searchText} onChange={handleSearchChange} />
       <div className="sidebar-nav">
         <TreeView data={filteredTreeData} />
       </div>

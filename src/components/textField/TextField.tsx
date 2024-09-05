@@ -4,7 +4,7 @@ import "./TextField.scss";
 
 interface ITextField {
   value: string;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextField = ({ value, onChange }: ITextField) => {

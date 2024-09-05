@@ -5,10 +5,7 @@ import { retrieveAllCompanies } from "../../api/companiesAPI";
 import { companyType } from "../../types/companies";
 import { hasLength } from "../../util/arrayUtil";
 import { IState } from "../../redux/reducers/companyReducer";
-import {
-  setComponentData,
-  setSelectedCompany,
-} from "../../redux/actions/companyAction";
+import { setSelectedCompany } from "../../redux/actions/companyAction";
 
 const CompaniesList = () => {
   const dispatch = useDispatch<any>();
@@ -29,6 +26,15 @@ const CompaniesList = () => {
     [dispatch, selectedCompany]
   );
 
+  const onCompanyClick = (selectedCompany: companyType) => {
+    dispatch(
+      setSelectedCompany({
+        id: selectedCompany.id,
+        name: selectedCompany.name,
+      })
+    );
+  };
+
   useEffect(() => {
     const fetchCompanies = async () => {
       const data = await retrieveAllCompanies();
@@ -38,15 +44,6 @@ const CompaniesList = () => {
 
     fetchCompanies();
   }, [fillInitialActiveCompany]);
-
-  const onCompanyClick = (selectedCompany: companyType) => {
-    dispatch(
-      setSelectedCompany({
-        id: selectedCompany.id,
-        name: selectedCompany.name,
-      })
-    );
-  };
 
   return (
     <div className="header__buttons">

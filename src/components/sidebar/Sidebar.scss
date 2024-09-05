@@ -13,7 +13,7 @@
 
   &-nav {
     max-height: 700px;
-    flex-grow: 1; // Permite que o TreeView ocupe o espaço restante da sidebar
-    overflow-y: auto; // Habilita o scroll vertical
+    flex-grow: 1;
+    overflow-y: auto;
   }
 }

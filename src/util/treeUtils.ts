@@ -78,9 +78,7 @@ export const filterTree = (
 export const parseLocationToTreeData = (locations: locationType[]) => {
   return locations.map((loc) => {
     const dataParsed: ITreeData = {
-      id: loc.id,
-      name: loc.name,
-      parentId: loc.parentId,
+      ...loc,
     };
 
     return dataParsed;
@@ -90,14 +88,7 @@ export const parseLocationToTreeData = (locations: locationType[]) => {
 export const parseAssetsToTreeData = (assets: assetsType[]) => {
   return assets.map((asset) => {
     const dataParsed: ITreeData = {
-      id: asset.id,
-      name: asset.name,
-      parentId: asset.parentId,
-      gatewayId: asset.gatewayId,
-      locationId: asset.locationId,
-      sensorId: asset.sensorId,
-      sensorType: asset.sensorType,
-      status: asset.status,
+      ...asset,
     };
 
     return dataParsed;
