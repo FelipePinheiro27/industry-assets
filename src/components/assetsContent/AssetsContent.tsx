@@ -9,7 +9,7 @@ import "./AssetsContent.scss";
 const AssetsContent = () => {
   const [filter, setFilter] = useState<FirlterType>("");
   const isMobile = useIsMobileView();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

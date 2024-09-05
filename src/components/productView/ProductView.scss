@@ -2,6 +2,14 @@
 
 .productView {
   border: 1px solid $border-color;
+
+  &-noData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+  }
+
   &__productTitle {
     display: flex;
     align-items: center;

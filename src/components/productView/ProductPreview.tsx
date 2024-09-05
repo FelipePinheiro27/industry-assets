@@ -20,7 +20,14 @@ const ProductView = () => {
   const isEnergy = sensorType === "energy";
   const responsible = isEnergy ? "Elétrica" : "Mecânica";
 
-  if (selectedComponent === null) return <>No data</>;
+  if (selectedComponent === null)
+    return (
+      <div className="productView">
+        <div className="productView-noData">
+          <h2>No Data</h2>
+        </div>
+      </div>
+    );
 
   return (
     <div className="productView">

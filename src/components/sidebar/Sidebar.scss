@@ -12,7 +12,7 @@
   flex-direction: column;
 
   &-nav {
-    max-height: 700px;
+    height: calc(100vh - 190px);
     flex-grow: 1;
     overflow-y: auto;
   }

@@ -6,8 +6,6 @@ const baseUrl = "https://fake-api.tractian.com";
 export const retrieveAllCompanies = async () => {
   try {
     const url = `${baseUrl}/companies`;
-
-    console.log(url);
     const response = await axios.get<companyType[]>(url);
     return response.data;
   } catch (error) {
