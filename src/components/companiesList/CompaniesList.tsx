@@ -5,7 +5,10 @@ import { retrieveAllCompanies } from "../../api/companiesAPI";
 import { companyType } from "../../types/companies";
 import { hasLength } from "../../util/arrayUtil";
 import { IState } from "../../redux/reducers/companyReducer";
-import { setSelectedCompany } from "../../redux/actions/companyAction";
+import {
+  setComponentData,
+  setSelectedCompany,
+} from "../../redux/actions/companyAction";
 
 const CompaniesList = () => {
   const dispatch = useDispatch<any>();
@@ -33,6 +36,7 @@ const CompaniesList = () => {
         name: selectedCompany.name,
       })
     );
+    dispatch(setComponentData(null));
   };
 
   useEffect(() => {
