@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import Bolt from "../../assets/bolt_2.svg";
 import "./Button.scss";
 
-const Button = () => {
-  const [isActive, setIsActive] = useState(false);
+interface IButton {
+  children: React.ReactNode;
+  onClick: () => void;
+  label: string;
+  isActive?: boolean;
+}
 
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
-
+const Button = ({ children, onClick, label, isActive }: IButton) => {
   return (
-    <div className={`button ${isActive ? "active" : ""}`} onClick={handleClick}>
-      <i className="button-icon">
-        <img src={Bolt} alt="Bolt" />
-      </i>
-      Sensor de Energia
+    <div className={`button ${isActive ? "active" : ""}`} onClick={onClick}>
+      {children}
+      {label}
     </div>
   );
 };

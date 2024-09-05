@@ -2,14 +2,27 @@ import React, { useState } from "react";
 import TextField from "../textField/TextField";
 import { useGroups } from "../../hooks/useGroups";
 import TreeView from "../tree/TreeView";
-import { buildTree, filterTree } from "../../util/treeUtils";
+import {
+  buildTree,
+  filterTree,
+  parseAssetsToTreeData,
+  parseLocationToTreeData,
+} from "../../util/treeUtils";
+import { FirlterType } from "../../types/filter";
 import "./Sidebar.scss";
 
-const Sidebar: React.FC = () => {
+interface ISidebar {
+  filter: FirlterType;
+}
+
+const Sidebar = ({ filter }: ISidebar) => {
   const { locations, assets } = useGroups();
   const [searchText, setSearchText] = useState("");
-  const treeData = buildTree(locations, assets);
-  const filteredTreeData = filterTree(treeData, searchText);
+  const treeData = buildTree(
+    parseLocationToTreeData(locations),
+    parseAssetsToTreeData(assets)
+  );
+  const filteredTreeData = filterTree(treeData, searchText, filter);
 
   return (
     <div className="sidebar">

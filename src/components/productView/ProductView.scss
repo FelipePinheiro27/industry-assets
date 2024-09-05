@@ -3,6 +3,9 @@
 .productView {
   border: 1px solid $border-color;
   &__productTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 15px 0;
     border: 1px solid $border-color;
     color: text-black-secondary-color;
@@ -19,6 +22,42 @@
       display: flex;
       div {
         width: 50%;
+      }
+    }
+  }
+
+  .textInfo {
+    display: block;
+    h4 {
+      margin: 0;
+      line-height: 24px;
+      margin-bottom: 7px;
+    }
+    i {
+      margin-right: 8px;
+    }
+    span {
+      font-size: 16px;
+      font-weight: 400;
+      color: $primary-text-gray-color;
+    }
+
+    &-responsibleContent {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &-circle {
+        display: flex;
+        height: 24px;
+        width: 24px;
+        font-size: 14px;
+        font-weight: 400;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: $button-secondary-color;
+        color: $text-white-color;
       }
     }
   }

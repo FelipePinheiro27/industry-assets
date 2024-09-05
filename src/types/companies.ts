@@ -10,12 +10,12 @@ export type locationType = {
 };
 
 export type assetsType = {
-  gatewayId: string;
   id: string;
   locationId: string;
   name: string;
+  gatewayId: string;
   parentId: string;
   sensorId: string;
   sensorType: string;
-  status: string;
+  status?: "alert" | "operating";
 };

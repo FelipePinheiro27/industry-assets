@@ -1,13 +1,13 @@
-import { IComponent } from "../../types/tree";
+import { ITreeData } from "../../types/tree";
 import { SET_COMPANY, SET_COMPONENT_DATA } from "../actions/actionTypes";
 
 export interface IState {
-  selectedCompany: string;
-  selectedComponent: IComponent | null;
+  selectedCompany: { name: string; id: string };
+  selectedComponent: ITreeData | null;
 }
 
 const initialState: IState = {
-  selectedCompany: "",
+  selectedCompany: { name: "", id: "" },
   selectedComponent: null,
 };
 

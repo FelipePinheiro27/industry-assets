@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../sidebar/Sidebar";
 import ProductView from "../productView/ProductPreview";
 import AssetsHeader from "../assetsHeader/AssetsHeader";
+import { FirlterType } from "../../types/filter";
 import "./AssetsContent.scss";
 
 const AssetsContent = () => {
+  const [filter, setFilter] = useState<FirlterType>("");
+
   return (
     <div className="assetsContent">
-      <AssetsHeader />
+      <AssetsHeader filter={filter} setFilter={setFilter} />
       <div className="assetsContent__boxes">
-        <Sidebar />
+        <Sidebar filter={filter} />
         <ProductView />
       </div>
     </div>

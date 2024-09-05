@@ -1,9 +1,11 @@
-import { IAsset, IComponent, ILocation } from "../types/tree";
+import { assetsType, locationType } from "../types/companies";
+import { FirlterType } from "../types/filter";
+import { ITreeData } from "../types/tree";
 
-export const buildTree = (locations: ILocation[], assets: IAsset[]) => {
-  const locationMap: Record<string, ILocation> = {};
-  const assetMap: Record<string, IAsset> = {};
-  const tree: Array<ILocation | IAsset | IComponent> = [];
+export const buildTree = (locations: ITreeData[], assets: ITreeData[]) => {
+  const locationMap: Record<string, ITreeData> = {};
+  const assetMap: Record<string, ITreeData> = {};
+  const tree: Array<ITreeData> = [];
 
   locations.forEach((location) => {
     locationMap[location.id] = {
@@ -43,22 +45,61 @@ export const buildTree = (locations: ILocation[], assets: IAsset[]) => {
 };
 
 export const filterTree = (
-  data: Array<ILocation | IAsset | IComponent>,
-  searchText: string
-): Array<ILocation | IAsset | IComponent> => {
-  return data.reduce(
-    (filtered: Array<ILocation | IAsset | IComponent>, item) => {
-      const children = filterTree(item?.children || [], searchText);
+  data: Array<ITreeData>,
+  searchText: string,
+  filter: FirlterType
+): Array<ITreeData> => {
+  return data.reduce((filtered: Array<ITreeData>, item) => {
+    const children = filterTree(item.children || [], searchText, filter);
 
-      if (
-        item.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        children.length > 0
-      ) {
-        filtered.push({ ...item, children });
-      }
+    const matchesSearchText = item.name
+      .toLowerCase()
+      .includes(searchText.toLowerCase());
 
-      return filtered;
-    },
-    []
-  );
+    const matchesFilter =
+      (filter === "energy" && item?.sensorType === "energy") ||
+      (filter === "critical" && item.status === "alert");
+
+    const noFilterApplied = filter === "";
+
+    if (
+      (noFilterApplied && (matchesSearchText || children.length > 0)) ||
+      (matchesFilter &&
+        (matchesSearchText || searchText === "" || children.length > 0)) ||
+      children.length > 0
+    ) {
+      filtered.push({ ...item, children });
+    }
+
+    return filtered;
+  }, []);
+};
+
+export const parseLocationToTreeData = (locations: locationType[]) => {
+  return locations.map((loc) => {
+    const dataParsed: ITreeData = {
+      id: loc.id,
+      name: loc.name,
+      parentId: loc.parentId,
+    };
+
+    return dataParsed;
+  });
+};
+
+export const parseAssetsToTreeData = (assets: assetsType[]) => {
+  return assets.map((asset) => {
+    const dataParsed: ITreeData = {
+      id: asset.id,
+      name: asset.name,
+      parentId: asset.parentId,
+      gatewayId: asset.gatewayId,
+      locationId: asset.locationId,
+      sensorId: asset.sensorId,
+      sensorType: asset.sensorType,
+      status: asset.status,
+    };
+
+    return dataParsed;
+  });
 };

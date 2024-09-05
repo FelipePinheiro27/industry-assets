@@ -1,15 +1,16 @@
-import { IComponent } from "../../types/tree";
+import { ITreeData } from "../../types/tree";
 import { SET_COMPANY, SET_COMPONENT_DATA } from "./actionTypes";
 
-export const setSelectedCompany = (companyId: string) => (dispatch: any) => {
-  dispatch({
-    type: SET_COMPANY,
-    companySelected: companyId,
-  });
-};
+export const setSelectedCompany =
+  (value: { id: string; name: string }) => (dispatch: any) => {
+    dispatch({
+      type: SET_COMPANY,
+      companySelected: value,
+    });
+  };
 
 export const setComponentData =
-  (componentData: IComponent) => (dispatch: any) => {
+  (componentData: ITreeData | null) => (dispatch: any) => {
     dispatch({
       type: SET_COMPONENT_DATA,
       selectedComponent: componentData,

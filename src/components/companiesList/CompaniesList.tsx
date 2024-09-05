@@ -5,7 +5,10 @@ import { retrieveAllCompanies } from "../../api/companiesAPI";
 import { companyType } from "../../types/companies";
 import { hasLength } from "../../util/arrayUtil";
 import { IState } from "../../redux/reducers/companyReducer";
-import { setSelectedCompany } from "../../redux/actions/companyAction";
+import {
+  setComponentData,
+  setSelectedCompany,
+} from "../../redux/actions/companyAction";
 
 const CompaniesList = () => {
   const dispatch = useDispatch<any>();
@@ -14,8 +17,13 @@ const CompaniesList = () => {
 
   const fillInitialActiveCompany = useCallback(
     (companiesFethed: companyType[]) => {
-      if (selectedCompany === "" && hasLength(companiesFethed)) {
-        dispatch(setSelectedCompany(companiesFethed[0].id));
+      if (selectedCompany.id === "" && hasLength(companiesFethed)) {
+        dispatch(
+          setSelectedCompany({
+            id: companiesFethed[0].id,
+            name: companiesFethed[0].name,
+          })
+        );
       }
     },
     [dispatch, selectedCompany]
@@ -32,7 +40,12 @@ const CompaniesList = () => {
   }, [fillInitialActiveCompany]);
 
   const onCompanyClick = (selectedCompany: companyType) => {
-    dispatch(setSelectedCompany(selectedCompany.id));
+    dispatch(
+      setSelectedCompany({
+        id: selectedCompany.id,
+        name: selectedCompany.name,
+      })
+    );
   };
 
   return (
@@ -43,7 +56,7 @@ const CompaniesList = () => {
             key={company.id}
             companyName={company.name}
             onClick={() => onCompanyClick(company)}
-            isActive={company.id === selectedCompany}
+            isActive={company.id === selectedCompany.id}
           />
         );
       })}

@@ -1,10 +1,12 @@
-import { ILocation, IAsset, IComponent } from "../../types/tree";
+import { ITreeData } from "../../types/tree";
 import TreeNode from "./TreeNode";
 import "./TreeView.scss";
 
-const TreeView: React.FC<{ data: (ILocation | IAsset | IComponent)[] }> = ({
-  data,
-}) => {
+interface ITreeView {
+  data: ITreeData[];
+}
+
+const TreeView = ({ data }: ITreeView) => {
   return (
     <div className="treeView">
       <ul>

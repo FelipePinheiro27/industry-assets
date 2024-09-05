@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Down from "../../assets/down.svg";
 import LocationIcon from "../../assets/location.svg";
 import AssetIcon from "../../assets/asset.svg";
 import ComponetIcon from "../../assets/component.png";
+import BoltIcon from "../../assets/bolt.svg";
+import BoltIconRed from "../../assets/bolt_red.svg";
 import { hasLength } from "../../util/arrayUtil";
-import { IAsset, ILocation, IComponent } from "../../types/tree";
+import { ITreeData } from "../../types/tree";
 import { setComponentData } from "../../redux/actions/companyAction";
 import { IState } from "../../redux/reducers/companyReducer";
+import { riskColor } from "../../constants/generalConstant";
 
 interface TreeNodeProps {
-  node: ILocation | IAsset | IComponent;
+  node: ITreeData;
 }
 
-const componentsByType = {
+const boltColor = {
+  operating: (
+    <i>
+      <img src={BoltIcon} alt={"Bolt"} />
+    </i>
+  ),
+  alert: (
+    <i>
+      <img src={BoltIconRed} alt={"Bolt Red"} />
+    </i>
+  ),
+};
+
+const iconsByType = {
   location: (
     <i>
       <img src={LocationIcon} alt="Location Icon" />
@@ -26,7 +42,7 @@ const componentsByType = {
   ),
   component: (
     <i>
-      <img src={ComponetIcon} alt="Componet Icon" />
+      <img src={ComponetIcon} alt="Component Icon" />
     </i>
   ),
 };
@@ -34,19 +50,24 @@ const componentsByType = {
 const TreeNode: React.FC<TreeNodeProps> = ({ node }) => {
   const dispatch = useDispatch<any>();
   const [isExpanded, setIsExpanded] = useState(true);
+  const isComponent = node.type === "component";
   const selectedComponent = useSelector(
     (state: IState) => state.selectedComponent
   );
 
   const onNodeClick = () => {
     if (node.type === "component") {
-      dispatch(setComponentData(node as IComponent));
+      dispatch(setComponentData(node));
       return;
     }
     setIsExpanded(!isExpanded);
   };
 
-  console.log(selectedComponent?.id);
+  const isEnergy = useMemo(() => {
+    if (isComponent) {
+      return node?.sensorType === "energy";
+    }
+  }, [isComponent, node]);
 
   return (
     <li className={selectedComponent?.id === node.id ? "active" : ""}>
@@ -56,8 +77,16 @@ const TreeNode: React.FC<TreeNodeProps> = ({ node }) => {
             <img src={Down} alt={isExpanded ? "Collapse" : "Expand"} />
           </i>
         )}
-        {componentsByType[node.type || "component"]}
+        {iconsByType[node.type || "component"]}
         {node.name}
+        {isEnergy ? (
+          boltColor[node.status!]
+        ) : (
+          <div
+            style={{ backgroundColor: riskColor[node.status!] }}
+            className="circle-risk"
+          />
+        )}
       </div>
       {isExpanded && node.children && node.children.length > 0 && (
         <ul>

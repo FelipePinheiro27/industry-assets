@@ -17,11 +17,13 @@ export const useGroups = () => {
   useEffect(() => {
     const fetchLocationAndAssets = async () => {
       try {
-        if (selectedCompany !== "") {
+        if (selectedCompany.id !== "") {
           const locationsData = await retrieveLocationsByCompanyId(
-            selectedCompany
+            selectedCompany.id
           );
-          const assetsData = await retrieveAssetsByCompanyId(selectedCompany);
+          const assetsData = await retrieveAssetsByCompanyId(
+            selectedCompany.id
+          );
           setLocations(locationsData);
           setAssets(assetsData);
         }

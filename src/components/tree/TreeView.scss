@@ -39,9 +39,9 @@
 
   &-icons {
     display: flex;
-    i {
-      margin-right: 7px;
-    }
+    gap: 7px;
+    align-items: center;
+
     .expand {
       transform: rotate(270deg);
     }
