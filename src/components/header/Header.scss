@@ -1,5 +1,28 @@
 @import "../../variables.scss";
 
+.headerMobile {
+  display: flex;
+  flex-direction: column;
+  background-color: $primary-header;
+  padding: 0 15px;
+  gap: 15px;
+  align-items: center;
+  color: $text-white-color;
+  height: 85px;
+  &-logo {
+    margin-top: 15px;
+  }
+
+  img {
+    height: 14px;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 10px;
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;

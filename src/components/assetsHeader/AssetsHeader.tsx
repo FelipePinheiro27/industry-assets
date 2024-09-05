@@ -8,11 +8,12 @@ import { FirlterType } from "../../types/filter";
 import "./AssetsHeader.scss";
 
 interface IAssetsHeader {
+  isMobile: boolean;
   filter: FirlterType;
   setFilter: React.Dispatch<React.SetStateAction<FirlterType>>;
 }
 
-const AssetsHeader = ({ filter, setFilter }: IAssetsHeader) => {
+const AssetsHeader = ({ isMobile, filter, setFilter }: IAssetsHeader) => {
   const selectedCompany = useSelector((state: IState) => state.selectedCompany);
 
   const onClickEnergyFilter = () => {
@@ -37,10 +38,13 @@ const AssetsHeader = ({ filter, setFilter }: IAssetsHeader) => {
 
   return (
     <header className="assetsHeader">
-      <div>
-        <h3>Ativos</h3>
-        <span> / {selectedCompany.name} Unit</span>
-      </div>
+      {!isMobile && (
+        <div>
+          <h3>Ativos</h3>
+          <span> / {selectedCompany.name} Unit</span>
+        </div>
+      )}
+
       <div className="assetsHeader-buttons">
         <Button
           onClick={onClickEnergyFilter}
